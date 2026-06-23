@@ -2,42 +2,14 @@ import java.util.*;
 
 public class OOPSBannerApp {
 
-    static class CharacterPatternMap {
-
-        private char character;
-        private String[] pattern;
-
-        public CharacterPatternMap(char character, String[] pattern) {
-            this.character = character;
-            this.pattern = pattern;
-        }
-
-        public char getCharacter() {
-            return character;
-        }
-
-        public String[] getPattern() {
-            return pattern;
-        }
-    }
-
-    public static String[] getCharacterPattern(
-            char ch,
-            CharacterPatternMap[] patterns) {
-
-        for (CharacterPatternMap pattern : patterns) {
-            if (pattern.getCharacter() == ch) {
-                return pattern.getPattern();
-            }
-        }
-        return null;
-    }
 
     public static void main(String[] args) {
 
-        CharacterPatternMap[] patterns = {
+        HashMap<Character , String []>  patterns = new HashMap<>();
 
-                new CharacterPatternMap('O', new String[]{
+
+
+               patterns.put('O', new String[]{
                         " ******** ",
                         "*        *",
                         "*        *",
@@ -45,9 +17,9 @@ public class OOPSBannerApp {
                         "*        *",
                         "*        *",
                         " ******** "
-                }),
+                });
 
-                new CharacterPatternMap('P', new String[]{
+                patterns.put('P', new String[]{
                         "********  ",
                         "*       * ",
                         "*       * ",
@@ -55,9 +27,9 @@ public class OOPSBannerApp {
                         "*         ",
                         "*         ",
                         "*         "
-                }),
+                });
 
-                new CharacterPatternMap('S', new String[]{
+                patterns.put('S', new String[]{
                         " ******** ",
                         "*         ",
                         "*         ",
@@ -65,23 +37,23 @@ public class OOPSBannerApp {
                         "         *",
                         "         *",
                         " ******** "
-                })
-        };
+                });
+        
 
         String word = "OOPS";
 
-        for (int row = 0; row < 7; row++) {
+        for (int row = 0; row < 7; row++){
 
-            StringBuilder bannerLine = new StringBuilder();
+        StringBuilder bannerLine = new StringBuilder();
 
-            for (char ch : word.toCharArray()) {
+        for (char ch : word.toCharArray()) {
 
-                String[] pattern = getCharacterPattern(ch, patterns);
+            String[] pattern = patterns.get(ch);
 
-                bannerLine.append(pattern[row]).append("   ");
-            }
-
-            System.out.println(bannerLine);
+            bannerLine.append(pattern[row]).append("   ");
         }
+
+        System.out.println(bannerLine);
+          }
     }
 }
